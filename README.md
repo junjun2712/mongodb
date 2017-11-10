@@ -198,5 +198,67 @@ test   0.000GB
 tbl
 ```
 
-# 启开登陆权限验证
+
+启开登陆权限验证
+```shell
 mongod --dbpath $DataDir --rest --auth
+```
+
+权限验证
+```shell
+/usr/local/mongodb/bin/mongo
+MongoDB shell version v3.4.10
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.4.10
+> db
+test
+# 无权限
+> show dbs
+2017-11-10T16:33:10.692+0800 E QUERY    [thread1] Error: listDatabases failed:{
+    "ok" : 0,
+    "errmsg" : "not authorized on admin to execute command { listDatabases: 1.0 }",
+    "code" : 13,
+    "codeName" : "Unauthorized"
+} :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+Mongo.prototype.getDBs@src/mongo/shell/mongo.js:62:1
+shellHelper.show@src/mongo/shell/utils.js:781:19
+shellHelper@src/mongo/shell/utils.js:671:15
+@(shellhelp2):1:1
+# 权限验证 无dba@test用户, 因为dba是在admin库中建立的
+> db.auth("dba","duliang")
+Error: Authentication failed. #mongod端log: UserNotFound: Could not find user dba@test
+0
+> use admin
+switched to db admin
+> db.auth("dba","duliang")
+1
+# admin库验证Ok 再切换test库(dba用户拥有dbAdminAnyDatabase角色权限)
+> use test
+switched to db test
+> show dbs
+admin  0.000GB
+local  0.000GB
+test   0.000GB
+> show collections
+tbl
+但是插入不了数据 加个readWriteAnyDatabase
+
+> db.updateUser( "dba",
+               {
+                 pwd: "duliang",
+                  customData: { ID: 1 },
+                  roles: [ { role: "dbAdminAnyDatabase", db: "admin" },
+                           { role: "userAdminAnyDatabase", db: "admin" },
+                           "dbOwner", "readWriteAnyDatabase"]
+                }
+             )
+
+> db.tbl.insert({title: 'mysql',
+     description: 'MySQL'
+ })
+
+> db.tbl.find()
+{ "_id" : ObjectId("5a055363cd07997992a0c1ef"), "title" : "MongoDB", "description" : "MongoDB is a database" }
+{ "_id" : ObjectId("5a056c0b05830e850b2a6048"), "title" : "mysql", "description" : "MySQL" }
+```
