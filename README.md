@@ -212,6 +212,7 @@ connecting to: mongodb://127.0.0.1:27017
 MongoDB server version: 3.4.10
 > db
 test
+
 # 无权限
 > show dbs
 2017-11-10T16:33:10.692+0800 E QUERY    [thread1] Error: listDatabases failed:{
@@ -225,6 +226,7 @@ Mongo.prototype.getDBs@src/mongo/shell/mongo.js:62:1
 shellHelper.show@src/mongo/shell/utils.js:781:19
 shellHelper@src/mongo/shell/utils.js:671:15
 @(shellhelp2):1:1
+
 # 权限验证 无dba@test用户, 因为dba是在admin库中建立的
 > db.auth("dba","duliang")
 Error: Authentication failed. #mongod端log: UserNotFound: Could not find user dba@test
@@ -233,6 +235,7 @@ Error: Authentication failed. #mongod端log: UserNotFound: Could not find user d
 switched to db admin
 > db.auth("dba","duliang")
 1
+
 # admin库验证Ok 再切换test库(dba用户拥有dbAdminAnyDatabase角色权限)
 > use test
 switched to db test
@@ -242,7 +245,7 @@ local  0.000GB
 test   0.000GB
 > show collections
 tbl
-但是插入不了数据 加个readWriteAnyDatabase
+# 但是插入不了数据 加个readWriteAnyDatabase
 
 > db.updateUser( "dba",
                {
