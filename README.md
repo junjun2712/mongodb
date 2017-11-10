@@ -92,5 +92,57 @@ system.version
 
 查看所有用户
 ```shell
-> show users #空
+> show users
+```
+
+新建用户
+```shell
+> db.createUser( { user: "dba",
+                 pwd: "duliang",
+                 customData: { employeeId: 12345 },
+                 roles: [ { role: "dbAdminAnyDatabase", db: "admin" },
+                          { role: "userAdminAnyDatabase", db: "admin" },
+                          "dbOwner"]} #这里没跟db:是指当前use的数据库的角色
+)
+Successfully added user: {
+    "user" : "dba",
+    "customData" : {
+        "employeeId" : 12345
+    },
+    "roles" : [
+        {
+            "role" : "dbAdminAnyDatabase",
+            "db" : "admin"
+        },
+        {
+            "role" : "userAdminAnyDatabase",
+            "db" : "admin"
+        },
+        "dbOwner"
+    ]
+}
+
+> show users;
+{
+    "_id" : "admin.dba",
+    "user" : "dba",
+    "db" : "admin",
+    "customData" : {
+        "employeeId" : 12345
+    },
+    "roles" : [
+        {
+            "role" : "dbAdminAnyDatabase",
+            "db" : "admin"
+        },
+        {
+            "role" : "userAdminAnyDatabase",
+            "db" : "admin"
+        },
+        {
+            "role" : "dbOwner",
+            "db" : "admin"
+        }
+    ]
+}
 ```
