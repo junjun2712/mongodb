@@ -2,11 +2,11 @@ MongoDB笔记
 =====
 
 
-## Installation
+## 安装
 
 [安装脚本](shell/mongodb-3.4.10.sh)
 
-## Configuration
+## 配置
 
 
-## Shell Methods
+## 命令 方法
