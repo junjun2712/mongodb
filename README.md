@@ -122,7 +122,7 @@ Successfully added user: {
     ]
 }
 
-> show users;
+> show users
 {
     "_id" : "admin.dba",
     "user" : "dba",
@@ -145,4 +145,58 @@ Successfully added user: {
         }
     ]
 }
+
+# 生成了users表
+> show collections;
+system.users
+system.version
 ```
+
+修改用户
+```shell
+db.updateUser( "dba",
+               {
+                 pwd: "dulaing",
+                 customData: { ID: 1 },
+                 roles: [ { role: "dbAdminAnyDatabase", db: "admin" },
+                          { role: "userAdminAnyDatabase", db: "admin" },
+                          "dbOwner"]
+               }
+             )
+```
+
+修改密码
+```shell
+db.changeUserPassword("dba", "duliang")
+```
+
+创建数据库(也是用use 不存在会自动新建)
+```shell
+> use test
+switched to db test
+
+# 有数据库才能创建
+> show dbs
+admin  0.000GB
+local  0.000GB
+```
+
+自动创建表(集合)和插入数据
+```shell
+> db.tbl.insert({title: 'MongoDB',
+     description: 'MongoDB is a database'
+})
+WriteResult({ "nInserted" : 1 })
+
+# 有数据库自动创建
+> show dbs
+admin  0.000GB
+local  0.000GB
+test   0.000GB
+
+> show collections
+tbl
+```
+
+# 启开登陆权限验证
+mongod --dbpath $DataDir --rest --auth
