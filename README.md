@@ -27,7 +27,7 @@ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-linux/
 mongo --port 28015
 
 # 远程MongoDB实例 使用认证
-mongo --username alice --password abc123 --host mongodb0.tutorials.com --port 28015
+mongo --username alice --password abc123 --host mongodb0.tutorials.com --port 28015 dbname
 ```
 
 查看所有库
