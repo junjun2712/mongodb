@@ -13,6 +13,8 @@ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-linux/
 
 ## 配置
 
+https://docs.mongodb.com/manual/reference/configuration-options/
+
  MongoDB默认未启用登陆权限验证功能
 
 
