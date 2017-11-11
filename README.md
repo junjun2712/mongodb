@@ -206,6 +206,17 @@ mongod --dbpath $DataDir --rest --auth
 
 权限验证
 ```shell
+# https://docs.mongodb.com/tutorials/enable-authentication/
+
+# [ 在连接期间进行身份验证 ]
+mongo --port 27017 -u "myTester" -p "xyz123" --authenticationDatabase "test"
+
+# [ 连接后进行身份验证 ]
+mongo --port 27017
+> use test
+> db.auth("myTester", "xyz123" )
+```
+```shell
 /usr/local/mongodb/bin/mongo
 MongoDB shell version v3.4.10
 connecting to: mongodb://127.0.0.1:27017
