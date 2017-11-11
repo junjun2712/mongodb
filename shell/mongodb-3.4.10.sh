@@ -13,6 +13,7 @@ InstallPath=/usr/local/mongodb
 DataDir=/data/mongodb #数据目录
 
 mkdir -p $DataDir
+mkdir $DataDir/log
 
 cd /usr/local/src
 curl -O https://fastdl.mongodb.org/linux/$FileName
@@ -33,6 +34,11 @@ security:
 
 storage:
   dbPath: /data/mongodb
+
+systemLog:
+  destination: file
+  path: "/data/mongodb/log/mongod.log"
+  logAppend: true
 EOF
 
 
