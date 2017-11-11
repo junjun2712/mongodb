@@ -20,7 +20,7 @@ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-linux/
 
 连接mongodb
 ```shell
-本地MongoDB实例 默认端口 27017
+# 本地MongoDB实例 默认端口 27017
 /usr/local/mongodb/bin/mongo
 
 # 本地MongoDB实例 非默认端口
