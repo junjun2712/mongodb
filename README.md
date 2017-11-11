@@ -20,7 +20,14 @@ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-linux/
 
 连接mongodb
 ```shell
+本地MongoDB实例 默认端口 27017
 /usr/local/mongodb/bin/mongo
+
+# 本地MongoDB实例 非默认端口
+mongo --port 28015
+
+# 远程MongoDB实例 使用认证
+mongo --username alice --password abc123 --host mongodb0.tutorials.com --port 28015
 ```
 
 查看所有库
