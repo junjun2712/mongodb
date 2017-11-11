@@ -30,7 +30,7 @@ net:
   port: 27017
 
 security:
-  authorization: enabled
+  authorization: enabled #等于--auth
 
 storage:
   dbPath: /data/mongodb
