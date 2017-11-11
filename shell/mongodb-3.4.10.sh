@@ -21,14 +21,22 @@ cp -R -n ${FileName%.*}/ $InstallPath
 export PATH=$InstallPath/bin:$PATH
 
 # 默认配置文件 https://docs.mongodb.com/manual/reference/configuration-options/
+# net.bindIp指mongodb服务器网卡的IP 非访客的IP
+# 不指定--dbpath的话默认/data/db
 cat >> /etc/mongod.conf <<EOF
 net:
-   bindIp: 127.0.0.1,192.168.0.60
-   port: 27017
+  bindIp: 127.0.0.1
+  port: 27017
+
+security:
+  authorization: enabled
+
+storage:
+  dbPath: /data/mongodb
 EOF
 
-#不指定--dbpath的话默认/data/db
-/$InstallPath/bin/mongod --dbpath $DataDir --rest
+
+/$InstallPath/bin/mongod -f /etc/mongod.conf --rest #实例加载的配置参数可通过日志中options一行查看
 
 # web rest地址访问(如果开启了--auth认证, rest web使用DB账号密码登陆会提示not allowed, 官方对rest登陆验证支持不好, 不建议使用)
 # curl http://192.168.1.176:28017/
