@@ -28,7 +28,7 @@ net:
 EOF
 
 #不指定--dbpath的话默认/data/db
-mongod --dbpath $DataDir --rest
+/usr/local/bin/mongod --dbpath $DataDir --rest
 
 # web rest地址访问
 # curl http://192.168.1.176:28017/
