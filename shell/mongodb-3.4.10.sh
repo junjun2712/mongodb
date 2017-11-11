@@ -25,7 +25,7 @@ export PATH=$InstallPath/bin:$PATH
 # 不指定--dbpath的话默认/data/db
 cat >> /etc/mongod.conf <<EOF
 net:
-  bindIp: 127.0.0.1
+  bindIp: 0.0.0.0 #0.0.0.0表示监听本机的所有IP网卡=127.0.0.1,42.121.6.138
   port: 27017
 
 security:
