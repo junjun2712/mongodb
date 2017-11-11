@@ -30,5 +30,5 @@ EOF
 #不指定--dbpath的话默认/data/db
 /$InstallPath/bin/mongod --dbpath $DataDir --rest
 
-# web rest地址访问
+# web rest地址访问(如果开启了--auth认证, rest web使用DB账号密码登陆会提示not allowed, 官方对rest登陆验证支持不好, 不建议使用)
 # curl http://192.168.1.176:28017/
