@@ -33,7 +33,7 @@ security:
   authorization: enabled #等于--auth
 
 storage:
-  dbPath: /data/mongodb
+  dbPath: /data/mongodb  #等于--dbpath
 
 systemLog:
   destination: file
